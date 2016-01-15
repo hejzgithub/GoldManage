@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csj.gold.dao.single.SysAuthorityMapper" >
+  <resultMap id="BaseResultMap" type="com.csj.gold.model.SysAuthority" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="authority_name" property="authorityName" jdbcType="VARCHAR" />
+    <result column="authority_type" property="authorityType" jdbcType="INTEGER" />
+    <result column="authority_value" property="authorityValue" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="is_forbidden" property="isForbidden" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, authority_name, authority_type, authority_value, remark, create_date, create_user, 
+    update_date, update_user, is_del, is_forbidden,version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_authority
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByParameters" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_authority
+    where 1 = 1
+    <if test="parameters!=null">
+     <if test="parameters.authorityName != null" >
+        and authority_name = #{parameters.authorityName,jdbcType=VARCHAR}
+      </if>
+      <if test="parameters.authorityType != null" >
+        and authority_type = #{parameters.authorityType,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.authorityValue != null" >
+        and authority_value = #{parameters.authorityValue,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.remark != null" >
+        and remark = #{parameters.remark,jdbcType=VARCHAR}
+      </if>
+      <if test="parameters.createDate != null" >
+        and create_date = #{parameters.createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="parameters.createUser != null" >
+        and create_user = #{parameters.createUser,jdbcType=BIGINT}
+      </if>
+      <if test="parameters.updateDate != null" >
+        and update_date = #{parameters.updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="parameters.updateUser != null" >
+        and update_user = #{parameters.updateUser,jdbcType=BIGINT}
+      </if>
+      <if test="parameters.isDel != null" >
+        and is_del = #{parameters.isDel,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.isForbidden != null" >
+        and is_forbidden = #{parameters.isForbidden,jdbcType=INTEGER}
+      </if>
+    </if>
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    update sys_authority
+    set is_del = 1 , version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="forbiddenByPrimaryKey" parameterType="java.lang.Long" >
+    update sys_authority
+    set is_forbidden = 1 , version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insert" parameterType="com.csj.gold.model.SysAuthority" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into sys_authority (id, authority_name, authority_type, 
+      authority_value, remark, create_date, 
+      create_user, update_date, update_user, 
+      is_del, is_forbidden)
+    values (#{id,jdbcType=BIGINT}, #{authorityName,jdbcType=VARCHAR}, #{authorityType,jdbcType=INTEGER}, 
+      #{authorityValue,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
+      #{isDel,jdbcType=INTEGER}, #{isForbidden,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csj.gold.model.SysAuthority" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into sys_authority
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="authorityName != null" >
+        authority_name,
+      </if>
+      <if test="authorityType != null" >
+        authority_type,
+      </if>
+      <if test="authorityValue != null" >
+        authority_value,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="isForbidden != null" >
+        is_forbidden,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="authorityName != null" >
+        #{authorityName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityType != null" >
+        #{authorityType,jdbcType=INTEGER},
+      </if>
+      <if test="authorityValue != null" >
+        #{authorityValue,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isForbidden != null" >
+        #{isForbidden,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csj.gold.model.SysAuthority" >
+    update sys_authority
+    <set >
+      <if test="authorityName != null" >
+        authority_name = #{authorityName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityType != null" >
+        authority_type = #{authorityType,jdbcType=INTEGER},
+      </if>
+      <if test="authorityValue != null" >
+        authority_value = #{authorityValue,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isForbidden != null" >
+        is_forbidden = #{isForbidden,jdbcType=INTEGER},
+      </if>
+      version = version + 1
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csj.gold.model.SysAuthority" >
+    update sys_authority
+    set authority_name = #{authorityName,jdbcType=VARCHAR},
+      authority_type = #{authorityType,jdbcType=INTEGER},
+      authority_value = #{authorityValue,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=INTEGER},
+      is_forbidden = #{isForbidden,jdbcType=INTEGER},
+      version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

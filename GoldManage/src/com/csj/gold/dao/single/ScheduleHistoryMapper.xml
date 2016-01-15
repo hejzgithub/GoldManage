@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csj.gold.dao.single.ScheduleHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.csj.gold.model.ScheduleHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="schedule_type" property="scheduleType" jdbcType="INTEGER" />
+    <result column="shcedule_date" property="shceduleDate" jdbcType="TIMESTAMP" />
+    <result column="actived_status" property="activedStatus" jdbcType="INTEGER" />
+    <result column="shcedule_actived_date" property="shceduleActivedDate" jdbcType="TIMESTAMP" />
+    <result column="shcedule_code" property="shceduleCode" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+    <result column="is_forbidden" property="isForbidden" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, schedule_type, shcedule_date, actived_status, shcedule_actived_date, shcedule_code, 
+    create_date, create_user, update_date, update_user, is_forbidden, is_del, version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from schedule_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByParameters" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from schedule_history
+    where 1 = 1
+    <if test="parameters!=null">
+    <if test="parameters.scheduleType != null" >
+        and schedule_type = #{parameters.scheduleType,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.shceduleDate != null" >
+        and shcedule_date = #{parameters.shceduleDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="parameters.activedStatus != null" >
+        and actived_status = #{parameters.activedStatus,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.shceduleActivedDate != null" >
+        and shcedule_actived_date = #{parameters.shceduleActivedDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="parameters.shceduleCode != null" >
+        and shcedule_code = #{parameters.shceduleCode,jdbcType=VARCHAR}
+      </if>
+      <if test="parameters.createDate != null" >
+        and create_date = #{parameters.createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="parameters.createUser != null" >
+        and create_user = #{parameters.createUser,jdbcType=BIGINT}
+      </if>
+      <if test="parameters.updateDate != null" >
+        and update_date = #{parameters.updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="parameters.updateUser != null" >
+        and update_user = #{parameters.updateUser,jdbcType=BIGINT}
+      </if>
+      <if test="parameters.isForbidden != null" >
+        and is_forbidden = #{parameters.isForbidden,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.isDel != null" >
+        and is_del = #{parameters.isDel,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.version != null" >
+        and version = #{parameters.version,jdbcType=INTEGER}
+      </if>
+    </if>
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    update schedule_history
+    set is_del = 1 , version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="forbiddenByPrimaryKey" parameterType="java.lang.Long" >
+    update schedule_history
+    set is_forbidden = 1 , version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insert" parameterType="com.csj.gold.model.ScheduleHistory" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into schedule_history (id, schedule_type, shcedule_date, 
+      actived_status, shcedule_actived_date, shcedule_code, 
+      create_date, create_user, update_date, 
+      update_user, is_forbidden, is_del, 
+      version)
+    values (#{id,jdbcType=BIGINT}, #{scheduleType,jdbcType=INTEGER}, #{shceduleDate,jdbcType=TIMESTAMP}, 
+      #{activedStatus,jdbcType=INTEGER}, #{shceduleActivedDate,jdbcType=TIMESTAMP}, #{shceduleCode,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=BIGINT}, #{isForbidden,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csj.gold.model.ScheduleHistory" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into schedule_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scheduleType != null" >
+        schedule_type,
+      </if>
+      <if test="shceduleDate != null" >
+        shcedule_date,
+      </if>
+      <if test="activedStatus != null" >
+        actived_status,
+      </if>
+      <if test="shceduleActivedDate != null" >
+        shcedule_actived_date,
+      </if>
+      <if test="shceduleCode != null" >
+        shcedule_code,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="isForbidden != null" >
+        is_forbidden,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="scheduleType != null" >
+        #{scheduleType,jdbcType=INTEGER},
+      </if>
+      <if test="shceduleDate != null" >
+        #{shceduleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activedStatus != null" >
+        #{activedStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shceduleActivedDate != null" >
+        #{shceduleActivedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shceduleCode != null" >
+        #{shceduleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="isForbidden != null" >
+        #{isForbidden,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csj.gold.model.ScheduleHistory" >
+    update schedule_history
+    <set >
+      <if test="scheduleType != null" >
+        schedule_type = #{scheduleType,jdbcType=INTEGER},
+      </if>
+      <if test="shceduleDate != null" >
+        shcedule_date = #{shceduleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activedStatus != null" >
+        actived_status = #{activedStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shceduleActivedDate != null" >
+        shcedule_actived_date = #{shceduleActivedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shceduleCode != null" >
+        shcedule_code = #{shceduleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="isForbidden != null" >
+        is_forbidden = #{isForbidden,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      version = version + 1
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csj.gold.model.ScheduleHistory" >
+    update schedule_history
+    set schedule_type = #{scheduleType,jdbcType=INTEGER},
+      shcedule_date = #{shceduleDate,jdbcType=TIMESTAMP},
+      actived_status = #{activedStatus,jdbcType=INTEGER},
+      shcedule_actived_date = #{shceduleActivedDate,jdbcType=TIMESTAMP},
+      shcedule_code = #{shceduleCode,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      is_forbidden = #{isForbidden,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

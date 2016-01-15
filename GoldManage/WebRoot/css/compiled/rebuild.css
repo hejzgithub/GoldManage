@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+.radio_state{
+	padding:8px 12px 10px;
+	}
+.manage li{
+	float:left;
+	}
+         .manage{margin-bottom:10px;}
+.manage .radio_state{
+	 margin-left:10px; font-size:0.875em;line-height:1em; cursor:pointer;
+	}
+         .manage_checked{
+	background:#3395d7; color:#fff; border-radius:5px; border-bottom:5px solid #2980b9;padding-bottom:4px;padding-top:9px;
+	}
+.clear{clear:both;}
+.pmb_right{
+	width:90%;float:left;
+	}
+.pmb_right li{float:left;}
+@media screen and (min-width:0) and (max-width:500px){
+	.pmb_right{
+		width:80%;
+	}
+	} 
+.table-responsive td{
+	text-align:center;
+	}
+
+
+
+.radio_state {
+    padding: 8px 12px 10px;
+}
+.manage li {
+    float: left;
+}
+.manage {
+    margin-bottom: 10px;
+}
+.manage .radio_state {
+    cursor: pointer;
+    font-size: 0.875em;
+    line-height: 1em;
+    margin-left: 10px;
+}
+.manage_checked {
+    background: #3395d7 none repeat scroll 0 0;
+    border-bottom: 5px solid #2980b9;
+    border-radius: 5px;
+    color: #fff;
+    padding-bottom: 4px;
+    padding-top: 9px;
+}
+.clear {
+    clear: both;
+}
+.pmb_right {
+    float: left;
+    width: 90%;
+}
+.pb_right {
+    float: left;
+    width: 80%;
+}
+.pmb_right li {
+    float: left;
+}
+@media screen and (min-width: 0px) and (max-width: 500px) {
+.pmb_right {
+    width: 80%;
+}
+}
+.tb_clicked{
+	background:#ccc;
+	
+	}
+
+
+.loading{
+	z-index:99999;position:absolute;width:100%;height:100%;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.2) !important; display:none;
+	}
+
+#preloader{
+	position:relative;left:50%;top:50%
+	}
+#preloader span{
+	position:absolute;width:100px;height:100px;border:5px solid #f00; border-radius:999px;
+	animation:radar 2s infinite linear;
+	opacity:0;
+	}
+#preloader span:nth-child(1){
+	animation-delay:0s;
+	}
+#preloader span:nth-child(2){
+	animation-delay:.66s;
+	}
+#preloader span:nth-child(3){
+	animation-delay:1.33s;
+	}
+@keyframes radar{
+	0%{transform:scale(0); opacity:0;}
+	25%{transform:scale(0); opacity:.5;}
+	50%{transform:scale(1); opacity:1;}
+	75%{transform:scale(1.5); opacity:.5;}
+	100%{transform:scale(2); opacity:0;}
+	
+	}
+#allmap{width:100% !important;}
+	

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csj.gold.dao.single.SysContactMapper" >
+  <resultMap id="BaseResultMap" type="com.csj.gold.model.SysContact" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="contact_title" property="contactTitle" jdbcType="VARCHAR" />
+    <result column="file_id" property="fileId" jdbcType="BIGINT" />
+    <result column="tontact_type" property="tontactType" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="is_forbidden" property="isForbidden" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, contact_title, file_id, tontact_type, create_date, create_user, update_date, 
+    update_user, is_del, is_forbidden,version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_contact
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByParameters" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_contact
+    where 1 = 1
+    <if test="parameters!=null">
+    <if test="parameters.contactTitle != null" >
+        and contact_title = #{parameters.contactTitle,jdbcType=VARCHAR}
+      </if>
+      <if test="parameters.fileId != null" >
+        and file_id = #{parameters.fileId,jdbcType=BIGINT}
+      </if>
+      <if test="parameters.tontactType != null" >
+        and tontact_type = #{parameters.tontactType,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.createDate != null" >
+        and create_date = #{parameters.createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="parameters.createUser != null" >
+        and create_user = #{parameters.createUser,jdbcType=BIGINT}
+      </if>
+      <if test="parameters.updateDate != null" >
+        and update_date = #{parameters.updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="parameters.updateUser != null" >
+        and update_user = #{parameters.updateUser,jdbcType=BIGINT}
+      </if>
+      <if test="parameters.isDel != null" >
+        and is_del = #{parameters.isDel,jdbcType=INTEGER}
+      </if>
+      <if test="parameters.isForbidden != null" >
+        and is_forbidden = #{parameters.isForbidden,jdbcType=INTEGER}
+      </if>
+    </if>
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    update sys_contact
+    set is_del = 1 , version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="forbiddenByPrimaryKey" parameterType="java.lang.Long" >
+    update sys_contact
+    set is_forbidden = 1 , version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insert" parameterType="com.csj.gold.model.SysContact" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into sys_contact (id, contact_title, file_id, 
+      tontact_type, create_date, create_user, 
+      update_date, update_user, is_del, 
+      is_forbidden)
+    values (#{id,jdbcType=BIGINT}, #{contactTitle,jdbcType=VARCHAR}, #{fileId,jdbcType=BIGINT}, 
+      #{tontactType,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{isDel,jdbcType=INTEGER}, 
+      #{isForbidden,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csj.gold.model.SysContact" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into sys_contact
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="contactTitle != null" >
+        contact_title,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="tontactType != null" >
+        tontact_type,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="isForbidden != null" >
+        is_forbidden,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="contactTitle != null" >
+        #{contactTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="tontactType != null" >
+        #{tontactType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isForbidden != null" >
+        #{isForbidden,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csj.gold.model.SysContact" >
+    update sys_contact
+    <set >
+      <if test="contactTitle != null" >
+        contact_title = #{contactTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="tontactType != null" >
+        tontact_type = #{tontactType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isForbidden != null" >
+        is_forbidden = #{isForbidden,jdbcType=INTEGER},
+      </if>
+      version = version + 1
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csj.gold.model.SysContact" >
+    update sys_contact
+    set contact_title = #{contactTitle,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=BIGINT},
+      tontact_type = #{tontactType,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=INTEGER},
+      is_forbidden = #{isForbidden,jdbcType=INTEGER},
+      version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

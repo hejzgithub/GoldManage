@@ -1,0 +1,56 @@
+/* CSS Document */
+
+*{
+	margin:0;padding:0; list-style:none; text-decoration:none;font-family:"微软雅黑";
+	}
+body{
+	font-size:14px;
+	}
+.clear{
+	clear:both;height:0;
+	}
+
+.main{
+	width:100%;
+	}
+.main ul{
+	background:url(../img/ul_bg.jpg) no-repeat center #f5f5f5;border-bottom:1px solid #c6c6c6;
+	}
+.main ul li{
+	float:left;text-align:center;padding:12px inherit;width:50%;font-size:1.2em;color:#bdbdbd;
+	}
+
+.main ul .chose{
+	color:#349b30;
+	}
+.list{
+	padding:3% 5%; display:none;
+	}
+.show{
+	display:block;
+	}
+	
+.box{
+	width:100%;border-bottom:1px solid #ccc;margin-bottom:3%;padding-bottom:3%;
+	}
+.box h1{
+	float:left;font-size:1.2em;font-weight:normal; letter-spacing:1px;
+	}
+.box i{
+	float:right;width:1em;
+	}
+.box i img{
+	width:100%;
+	}
+.box p{
+	font-size:1.2em;padding:5px 0;line-height:1.5em; letter-spacing:1px;padding-right:13%;
+	}
+.box span{
+	float:right;line-height:1em;color:#a9a9a9;
+	}
+.ui-loader{
+	display:none;
+	}
+.date_chose{
+	background:#ccc; border:none;
+	}

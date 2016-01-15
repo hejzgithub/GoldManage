@@ -108,7 +108,7 @@
 								<li class="active"><span>产品</span></li>
 							</ol>
 							<!-- 标题 -->
-							<h1>ss
+							<h1>
 								产品 <small>Secondary headline</small>
 							</h1>
 						</div>
@@ -433,73 +433,114 @@
 					</div>
 				</div>
 			
-				<div class="wizard-card" data-cardname="group">
-					<h3><span>产品发行信息</span></h3>
-					
-					<div class="wizard-input-section">
-						<p>
-							
-						</p>
-			
-						<div class="form-group">
-							<label for="productName">产品发行份额</label>
-							<input type="text" class="form-control" />
-						</div>
-						<div class="form-group">
-							<label for="productName">产品发行单价</label>
-							<select style="width:300px" id="buyingPatterns">
-								<option value="均可" selected="selected">元</option>
-								<option value="货币">克</option>
-								
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="productName">产品发行单位</label>
-							<input type="text" class="form-control"  maxlength="18" />
-						</div>
-						
-						<div class="form-group">
-							<label for="product_money_type">产品交易货币类型</label>
-							<select style="width:300px" id="buyingPatterns">
-								<option value="均可" selected="selected">均可</option>
-								<option value="货币">货币</option>
-								<option value="黄金">黄金</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="productName">产品交易费率类型</label>
-							<select style="width:300px" id="buyingPatterns">
-								<option value="无" selected="selected">无</option>
-								<option value="固定费用">固定费用</option>
-								<option value="固定费率">固定费率</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="productName">产品交易费收取条件</label>
-							<select style="width:300px" id="buyingPatterns">
-								<option value="无" selected="selected">无</option>
-								<option value="购买收费">购买收费</option>
-								<option value="赎回收费">赎回收费</option>
-								<option value="前后收费">前后收费</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="productName">产品手续费</label>
-							<input type="text" class="form-control"  />
-						</div>
-						<div class="form-group">
-							<label for="productName">产品手续费单位</label>
-							
-							<select style="width:300px" id="buyingPatterns">
-								<option value="无" selected="selected">无</option>
-								<option value="购买收费">元</option>
-								<option value="赎回收费">克</option>
-								<option value="前后收费">毫克</option>
-								<option value="前后收费">%</option>
-							</select>
-						</div>
+					<div class="wizard" id="wizard-demo">
+			<h1>产品</h1>
+			<div class="wizard-card" data-onValidated="setServerName" data-cardname="name">
+				<h3><span>产品基本信息</span></h3>
+
+				<div class="wizard-input-section">
+					<p>
+
+					</p>
+
+					<div class="form-group">
+						<label for="productName">产品名称</label>
+						<input type="text" class="form-control"  placeholder="请输入产品名称" maxlength="18" />
 					</div>
-					
+
+					<div class="form-group">
+						<label for="exampleInputEmail1">产品简介</label>
+						<input type="text" class="form-control" placeholder="请输入产品介绍" maxlength="25" />
+					</div>
+
+					<div class="form-group">
+						<label for="datepickerDateRange">产品售卖起止时间</label>
+						<div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                            <input type="text" class="form-control" placeholder="产品售卖起止时间" maxlength="25" id="datepickerDateRange" />
+                        </div>
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputEmail1">产品类型</label>
+						<select style="width:300px" >
+
+							<option value="定期">定期</option>
+							<option value="活期">活期</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputEmail1">产品分类</label>
+						<input type="text" class="form-control" placeholder="请输入产品介绍" maxlength="25" />
+					</div>
+				</div>
+			</div>
+
+			<div class="wizard-card" data-cardname="group">
+				<h3><span>产品发行信息</span></h3>
+
+				<div class="wizard-input-section">
+					<p>
+
+					</p>
+
+					<div class="form-group">
+						<label for="productName">产品发行份额</label>
+						<input type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="productName">产品发行单价</label>
+						<select style="width:300px" >
+							<option value="0" selected="selected">元</option>
+							<option value="1">克</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="productName">产品发行单位</label>
+						<input type="text" class="form-control" maxlength="18" />
+					</div>
+
+					<div class="form-group">
+						<label for="product_money_type">产品交易货币类型</label>
+						<select style="width:300px" id="currencyType" name="currencyType" >
+							<option value="0" selected="selected">均可</option>
+							<option value="1">货币</option>
+							<option value="2">黄金</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="productName">产品交易费率类型</label>
+						<select style="width:300px" id="rateType" name="rateType">
+							<option value="0" selected="selected">无</option>
+							<option value="1">固定费用</option>
+							<option value="2">固定费率</option>
+						</select>
+					</div>
+					<div class="form-group rate">
+						<label for="productName">产品交易费收取条件</label>
+						<select style="width:300px" id="transactionFeesCondition" name="transactionFeesCondition">
+							<option value="0" selected="selected">无</option>
+							<option value="1">购买收费</option>
+							<option value="2">赎回收费</option>
+							<option value="3">前后收费</option>
+						</select>
+					</div>
+					<div class="form-group rate">
+						<label for="productName">产品手续费</label>
+						<input type="text" class="form-control" id="poundage" name="poundage"/>
+					</div>
+					<div class="form-group rate">
+						<label for="productName">产品手续费单位</label>
+
+						<select style="width:300px" id="rateUnit" name="rateUnit">
+							<option value="0" selected="selected">无</option>
+							<option value="1">元</option>
+							<option value="2">克</option>
+							<option value="3">毫克</option>
+							<option value="4">%</option>
+						</select>
+					</div>
 				</div>
 			
 				<div class="wizard-card" data-cardname="services">
